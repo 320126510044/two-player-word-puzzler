@@ -1,0 +1,333 @@
+<html>
+
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        hr {
+            width: 100%;
+            height: 10px;
+            background-color: gray;
+        }
+
+        .player-container {
+            width: 400px;
+            height: 70px;
+            background-color: lightblue;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 20px;
+            ;
+        }
+
+        .main-container {
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .sub-container {
+            background-color: lightblue;
+           border-radius: 20px;
+           padding:20px;
+        }
+
+        button {
+            display: block;
+            margin: 20px;
+            padding: 10px 40px;
+            border-radius: 10px;
+        }
+        .player{
+            padding:20px;
+        }
+    </style>
+    <title>Two Player Game
+    </title>
+</head>
+
+<body>
+
+
+
+
+
+    <!-- <h4>turn</h4>
+<div id="turn"></div> -->
+    <div class="main-container">
+        <div class="sub-container">
+            <div class="player-container">
+                <div class="player">
+
+                    <h4>Name of firstplayer</h4>
+                    <input type="text" id="player-1" name="firstPlayer">
+                </div>
+                <div class="player">
+                    <h4>Name of secondplayer</h4>
+                    <input type="text" id="player-2" name="secondPlayer">
+                </div>
+            </div>
+
+            <div>
+                <h4>Question:</h4>
+                <div class="question-container" id="question"></div>
+            </div>
+            <div>
+                <h4>turn</h4>
+                <h4 id="turn"></h4>
+                <div class="score-container"></div>
+            </div>
+            <div>
+                <h4>Player-1 score:</h4>
+                <div id="player-1-score"></div>
+
+            </div>
+
+
+            <div>
+                <h4>player-2 score:</h4>
+                <div id="player-2-score"></div>
+
+            </div>
+            <div>
+                <h4>Answer:</h4>
+                <input type="text" id="ans">
+            </div>
+
+
+
+
+            <center>
+            <button id="play" name="play"> Begin the game </button>
+
+
+            <button id="exit">exit</button>
+            </center>
+        </div>
+    </div>
+    <script>function choose() {
+        const words = ["aback", "abaft", "abandoned", "abashed", "aberrant", "abhorrent", "abiding", "abject", "ablaze", "able", "abnormal", "aboard", "aboriginal", "abortive", "abounding", "abrasive", "abrupt", "absent", "absorbed", "absorbing", "abstracted", "absurd", "abundant", "abusive", "accept", "acceptable", "accessible", "accidental", "account", "accurate", "achiever", "acid", "acidic", "acoustic", "acoustics", "acrid", "act", "action", "activity", "actor", "actually", "ad hoc", "adamant", "adaptable", "add", "addicted", "addition", "adhesive", "adjoining", "adjustment", "admire", "admit", "adorable", "adventurous", "advertisement", "advice", "advise", "afford", "afraid", "aftermath", "afternoon", "afterthought", "aggressive", "agonizing", "agree", "agreeable", "agreement", "ahead", "air", "airplane", "airport", "ajar", "alarm", "alcoholic", "alert", "alike", "alive", "alleged", "allow", "alluring", "aloof", "amazing", "ambiguous", "ambitious", "amount", "amuck", "amuse", "amused", "amusement", "amusing", "analyze", "ancient", "anger", "angle", "angry", "animal", "animated", "announce", "annoy", "annoyed", "annoying", "answer", "ants", "anxious", "apathetic", "apologise", "apparatus", "apparel", "appear", "applaud", "appliance", "appreciate", "approval", "approve", "aquatic", "arch", "argue", "argument", "arithmetic", "arm", "army", "aromatic", "arrange", "arrest", "arrive", "arrogant", "art", "ashamed", "ask", "aspiring", "assorted", "astonishing", "attach", "attack", "attempt", "attend", "attract", "attraction", "attractive", "aunt", "auspicious", "authority", "automatic", "available", "average", "avoid", "awake", "aware", "awesome", "awful", "axiomatic", "babies", "baby", "back", "bad", "badge", "bag", "bait", "bake", "balance", "ball", "ban", "bang", "barbarous", "bare", "base", "baseball", "bashful", "basin", "basket", "basketball", "bat", "bath", "bathe", "battle", "bawdy", "bead", "beam", "bear", "beautiful", "bed", "bedroom", "beds", "bee", "beef", "befitting", "beg", "beginner", "behave", "behavior", "belief", "believe", "bell", "belligerent", "bells", "belong", "beneficial", "bent", "berry", "berserk", "best", "better", "bewildered", "big", "bike", "bikes", "billowy", "bird", "birds", "birth", "birthday", "bit", "bite", "bite-sized", "bitter", "bizarre", "black", "black-and-white", "blade", "bleach", "bless", "blind", "blink", "blood", "bloody", "blot", "blow", "blue", "blue-eyed", "blush", "blushing", "board", "boast", "boat", "boil", "boiling", "bolt", "bomb", "bone", "book", "books", "boorish", "boot", "border", "bore", "bored", "boring", "borrow", "bottle", "bounce", "bouncy", "boundary", "boundless", "bow", "box", "boy", "brainy", "brake", "branch", "brash", "brass", "brave", "brawny", "breakable", "breath", "breathe", "breezy", "brick", "bridge", "brief", "bright", "broad", "broken", "brother", "brown", "bruise", "brush", "bubble", "bucket", "building", "bulb", "bump", "bumpy", "burly", "burn", "burst", "bury", "bushes", "business", "bustling", "busy", "butter", "button", "buzz", "cabbage", "cable", "cactus", "cagey", "cake", "cakes", "calculate", "calculating", "calculator", "calendar", "call", "callous", "calm", "camera", "camp", "can", "cannon", "canvas", "cap", "capable", "capricious", "caption", "car", "card", "care", "careful", "careless", "caring", "carpenter", "carriage", "carry", "cars", "cart", "carve", "cast", "cat", "cats", "cattle", "cause", "cautious", "cave", "ceaseless", "celery", "cellar", "cemetery", "cent", "certain", "chalk", "challenge", "chance", "change", "changeable", "channel", "charge", "charming", "chase", "cheap", "cheat", "check", "cheer", "cheerful", "cheese", "chemical", "cherries", "cherry", "chess", "chew", "chicken", "chickens", "chief", "childlike", "children", "chilly", "chin", "chivalrous", "choke", "chop", "chubby", "chunky", "church", "circle", "claim", "clam", "clammy", "clap", "class", "classy", "clean", "clear", "clever", "clip", "cloistered", "close", "closed", "cloth", "cloudy", "clover", "club", "clumsy", "cluttered", "coach", "coal", "coast", "coat", "cobweb", "coherent", "coil", "cold", "collar", "collect", "color", "colorful", "colossal", "colour", "comb", "combative", "comfortable", "command", "committee", "common", "communicate", "company", "compare", "comparison", "compete", "competition", "complain", "complete", "complex", "concentrate", "concern", "concerned", "condemned", "condition", "confess", "confuse", "confused", "connect", "connection", "conscious", "consider", "consist", "contain", "continue", "control", "cooing", "cook", "cool", "cooperative", "coordinated", "copper", "copy", "corn", "correct", "cough", "count", "country", "courageous", "cover", "cow", "cowardly", "cows", "crabby", "crack", "cracker", "crash", "crate", "craven", "crawl", "crayon", "crazy", "cream", "creator", "creature", "credit", "creepy", "crib", "crime", "crook", "crooked", "cross", "crow", "crowd", "crowded", "crown", "cruel", "crush", "cry", "cub", "cuddly", "cultured", "cumbersome", "cup", "cure", "curious", "curl", "curly", "current", "curtain", "curve", "curved", "curvy", "cushion", "cut", "cute", "cycle", "cynical", "dad", "daffy", "daily", "dam", "damage", "damaged", "damaging", "damp", "dance", "dangerous", "dapper", "dare", "dark", "dashing", "daughter", "day", "dazzling", "dead", "deadpan", "deafening", "dear", "death", "debonair", "debt", "decay", "deceive", "decide", "decision", "decisive", "decorate", "decorous", "deep", "deeply", "deer", "defeated", "defective", "defiant", "degree", "delay", "delicate", "delicious", "delight", "delightful", "delirious", "deliver", "demonic", "depend", "dependent", "depressed", "deranged", "describe", "descriptive", "desert", "deserted", "deserve", "design", "desire", "desk", "destroy", "destruction", "detail", "detailed", "detect", "determined", "develop", "development", "devilish", "didactic", "different", "difficult", "digestion", "diligent", "dime", "dinner", "dinosaurs", "direction", "troubled", "trousers", "truck", "trucks", "truculent", "true", "trust", "truthful", "try", "tub", "tug", "tumble", "turkey", "turn", "twig", "twist", "two", "type", "typical", "ubiquitous", "ugliest", "ugly", "ultra", "umbrella", "unable", "unaccountable", "unadvised", "unarmed", "unbecoming", "unbiased", "uncle", "uncovered", "understood", "underwear", "undesirable", "undress", "unequal", "unequaled", "uneven", "unfasten", "unhealthy", "uninterested", "unique", "unit", "unite", "unkempt", "unknown", "unlock", "unnatural", "unpack", "unruly", "unsightly", "unsuitable", "untidy", "unused", "unusual", "unwieldy", "unwritten", "upbeat", "uppity", "upset", "uptight", "use", "used", "useful", "useless", "utopian", "utter", "uttermost", "vacation", "vacuous", "vagabond", "vague", "valuable", "value", "van", "vanish", "various", "vase", "vast", "vegetable", "veil", "vein", "vengeful", "venomous", "verdant", "verse", "versed", "vessel", "vest", "victorious", "view", "vigorous", "violent", "violet", "visit", "visitor", "vivacious", "voice", "voiceless", "volatile", "volcano", "volleyball", "voracious", "voyage", "vulgar", "wacky", "waggish", "wail", "wait", "waiting", "wakeful", "walk", "wall", "wander", "wandering", "want", "wanting", "war", "warlike", "warm", "warn", "wary", "wash", "waste", "wasteful", "watch", "water", "watery", "wave", "waves", "wax", "way", "weak", "wealth", "wealthy", "weary", "weather", "week", "weigh", "weight", "welcome", "well-groomed", "well-made", "well-off", "well-to-do", "wet", "wheel", "whimsical", "whine", "whip", "whirl", "whisper", "whispering", "whistle", "white", "whole", "wholesale", "wicked", "wide", "wide-eyed", "wiggly", "wild", "wilderness", "willing", "wind", "window", "windy", "wine", "wing", "wink", "winter", "wipe", "wire", "wiry", "wise", "wish", "wistful", "witty", "wobble", "woebegone", "woman", "womanly", "women", "wonder", "wonderful", "wood", "wooden", "wool", "woozy", "word", "work", "workable", "worm", "worried", "worry", "worthless", "wound", "wrap", "wrathful", "wreck", "wren", "wrench", "wrestle", "wretched", "wriggle", "wrist", "writer", "writing", "wrong", "wry", "x-ray", "yak", "yam", "yard", "yarn", "yawn", "year", "yell", "yellow", "yielding", "yoke", "young", "youthful", "yummy", "zany", "zealous", "zebra", "zephyr", "zesty", "zinc", "zip", "zipper", "zippy", "zonked", "zoo", "zoom"]
+    
+        var pick = words[Math.floor(Math.random() * words.length)];
+        return pick;
+    }
+    
+    const questionPlace = document.getElementById('question')
+    const player1 = document.getElementById('player-1')
+    const player2 = document.getElementById('player-2')
+    const playerTurn = document.getElementById('turn');
+    const answerPlace = document.getElementById('ans')
+    const playButton = document.getElementById('play')
+    
+    const playerOneScore = document.getElementById('player-1-score')
+    const playerTwoScore = document.getElementById('player-2-score')
+    const winner = document.getElementById('wins')
+    const checker = document.getElementById('check-the-answer')
+    
+    
+    const continueOrNotButton = document.getElementById('continue')
+    
+    const exitButton = document.getElementById('exit')
+    
+    
+    
+    let picked_word;
+    let qn;
+    var pp1 = 0;
+    var pp2 = 0;
+    var turn = 0;
+    
+    
+    
+    function chooseQuestion() {
+        picked_word = choose();
+        qn = jumble(picked_word);
+        questionPlace.innerHTML = `<h4>find the word ? ${qn}</h4>`;
+    }
+    
+    
+    function jumble(word) {
+        let letters = word.split('');
+    
+        for (let i = 0; i < letters.length; i++) {
+            let j = Math.floor(Math.random() * letters.length);
+            let temp = letters[i];
+            letters[i] = letters[j];
+            letters[j] = temp;
+        }
+    
+    
+        return letters.join('');
+    }
+    
+    
+    
+    function thank(p1n, p2n, p1, p2) {
+        winner.innerHTML = `<h3>${p1n} you score is: ${p1} ${p2n} your score is ${p2} Thank you for playing</h3>`
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    playButton.addEventListener('click', play)
+    
+    
+    
+    
+    
+    
+    function play(e) {
+    console.log('playing')
+        setInterval(() => {
+          
+            if (turn % 2 == 0) {
+                // askChance.innerHTML = ""
+                // console.log(player1)
+                playerTurn.innerHTML = `${player1.value} your turn<br> what is on my mind ?`;
+                chooseQuestion()
+                //---------------------------------------------------------------------------------------------------
+                setTimeout(() => {
+                    let ans = answerPlace.value
+                    console.log(ans.value)
+                    if (ans == picked_word) {
+                        pp1 = pp1 + 1;
+    
+                        playerOneScore.innerHTML = `your score is ${pp1}`
+                    } else {
+    
+                        playerOneScore.innerHTML = `Better luck next time , I thought :,${picked_word}`
+    
+                    }
+                    
+                }, 10000)
+    
+                //---------------------------------------------------------------------------------------------------
+    
+    
+                // var c = prompt("press 1 to continue 0 to quit: ");
+                // // askChance.innerHTML = "<h4>press 1 to continue 0 to quit:</h4>"
+                // if (parseInt(c) == 0) {
+                //     // thank(player1.value, player2.value, pp1, pp2);
+                //     break;
+                // }
+               
+            }
+    
+            else {
+                chooseQuestion()
+                playerTurn.innerHTML = `${player2.value} your turn<br> what is on my mind ?`;
+    
+    
+    
+                setTimeout(() => {
+                    let ans = answerPlace.value
+                   
+    console.log(ans.value)
+                    if (ans == picked_word) {
+                        pp2 = pp2 + 1;
+    
+                        playerTwoScore.innerHTML = `your score is ${pp2}`
+                    } else {
+    
+                        playerTwoScore.innerHTML = `Better luck next time , I thought :,${picked_word}`
+    
+                    }
+                }, 10000)
+    
+             
+            }
+    
+            turn = turn + 1;
+        }, 22000)
+    }
+    
+    
+    
+    exitButton.addEventListener('click',()=>{
+        window.location.href=`/4?p1Name=${player1.value}&p2Name=${player2.value}&p1s=${pp1}&p2s=${pp2}`
+    })
+    
+    // function Init(){  
+    
+    
+    // if (turn % 2 == 0) {
+    //     // askChance.innerHTML = ""
+    //     // console.log(player1)
+    //     playerTurn.innerHTML = `${player1.value} your turn<br> what is on my mind ?`;
+    //     chooseQuestion()
+    //     //---------------------------------------------------------------------------------------------------
+    //     setTimeout(() => {
+    //         let ans = answerPlace.value
+    //         console.log(ans.value)
+    //         if (ans == picked_word) {
+    //             pp1 = pp1 + 1;
+    
+    //             playerOneScore.innerHTML = `your score is ${pp1}`
+    //         } else {
+    
+    //             playerOneScore.innerHTML = `Better luck next time , I thought :,${picked_word}`
+    
+    //         }
+            
+    //     }, 15000)
+    
+    //     //---------------------------------------------------------------------------------------------------
+    
+    
+    //     // var c = prompt("press 1 to continue 0 to quit: ");
+    //     // // askChance.innerHTML = "<h4>press 1 to continue 0 to quit:</h4>"
+    //     // if (parseInt(c) == 0) {
+    //     //     // thank(player1.value, player2.value, pp1, pp2);
+    //     //     break;
+    //     // }
+       
+    // }
+    
+    // else {
+    //     chooseQuestion()
+    //     playerTurn.innerHTML = `${player2.value} your turn<br> what is on my mind ?`;
+    
+    
+    
+    //     setTimeout(() => {
+    //         let ans = answerPlace.value
+           
+    // console.log(ans.value)
+    //         if (ans == picked_word) {
+    //             pp2 = pp2 + 1;
+    
+    //             playerTwoScore.innerHTML = `your score is ${pp2}`
+    //         } else {
+    
+    //             playerTwoScore.innerHTML = `Better luck next time , I thought :,${picked_word}`
+    
+    //         }
+    //     }, 15000)
+    
+     
+    // }
+    
+    // }
+    
+    
+    // setTimeout(()=>{Init()},8000)
+    </script>
+</body>
+
+</html>

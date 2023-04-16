@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: grid;
+            place-items: center;
+            background-color: black;
+            min-height: 100vh
+        }
+
+        .main-container {
+            background-color: lightblue;
+            padding: 50px;
+            border-radius: 20px;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div>
+            <h1>Score DashBoard</h1>
+
+            <h4 id="p1"></h4>
+            <h4 id='p1s'></h4>
+            <h4 id="p2"></h4>
+            <h4 id="p2s"></h4>
+            <h4>winner</h4>
+            <h4 id="winner"></h4>
+        </div>
+    </div>
+    <script>
+
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+
+
+        const playerOneScorePlace = document.getElementById('p1s')
+        const playerTwoScorePlace = document.getElementById('p2s')
+        const winner = document.getElementById('winner')
+        const playerOneName = document.getElementById('p1')
+        const playerTwoName = document.getElementById('p2')
+
+        playerOneScorePlace.innerHTML = `${params.p1s}`
+        playerTwoScorePlace.innerHTML = `${params.p2s}`
+
+        playerOneName.innerHTML = `${params.p1Name}`
+        playerTwoName.innerHTML = `${params.p2Name}`
+
+        if (params.p1s > params.p2s) {
+            winner.innerHTML = params.p1Name
+        }
+        else if (params.p1s == params.p2s) {
+            winner.innerHTML = "Draw"
+        }
+        else {
+            winner.innerHTML = params.p2Name
+        }
+
+
+    </script>
+</body>
+
+</html>
